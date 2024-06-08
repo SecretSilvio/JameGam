@@ -5,6 +5,7 @@ using UnityEngine;
 public class RandomColor : MonoBehaviour
 {
     public GameObject prefab; // The prefab to instantiate
+    public Transform parentOfCivilians;
     public Material baseMaterial; // The base material to clone and modify
     public int numberOfInstances = 10; // Number of instances to create
 
@@ -14,7 +15,7 @@ public class RandomColor : MonoBehaviour
         {
             // Instantiate the object at a random position within a specified range
             Vector3 randomPosition = new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
-            GameObject instance = Instantiate(prefab, randomPosition, Quaternion.identity);
+            GameObject instance = Instantiate(prefab, randomPosition, Quaternion.identity, parentOfCivilians);
             Renderer renderer = instance.GetComponentInChildren<MeshRenderer>();
 
             // Create a new material instance so each object has its own unique material
