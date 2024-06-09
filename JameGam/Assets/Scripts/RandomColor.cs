@@ -7,6 +7,7 @@ public class RandomColor : MonoBehaviour
     public GameObject prefab; // The prefab to instantiate
     public Transform parentOfCivilians;
     public Material baseMaterial; // The base material to clone and modify
+    public Material[] allColors;
     public int numberOfInstances = 10; // Number of instances to create
 
     void Start()
@@ -22,10 +23,13 @@ public class RandomColor : MonoBehaviour
             Material newMaterial = new Material(baseMaterial);
 
             // Assign a random color to the material
-            newMaterial.color = Random.ColorHSV();
+            int index = Random.Range(0, allColors.Length - 1);
+            newMaterial.color = allColors[index].color;
+            newMaterial.name = allColors[index].name;
 
             // Apply the material to the renderer
             renderer.material = newMaterial;
+            renderer.material.name = renderer.material.name.Replace(" (Instance)", "");
         }
     }
 }
